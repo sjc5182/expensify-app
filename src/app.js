@@ -3,13 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import subtract, { square, add } from './utils.js';
-import isSenior, {isAdult, canDrink} from './person.js';
-import validator from 'validator';
 
 const ExpenseDashboardPage = () =>(
   <div>
-    This is from my dashboard component
+    This is my Dashboard Page
   </div>
 )
 
@@ -63,27 +60,3 @@ const routes = (
 
 
 ReactDOM.render(routes, document.getElementById('app'));
-
-
-
-
-// const template = <p>testing</p>;
-
-// ReactDOM.render(template, document.getElementById('app'));
-
-
-// console.log(validator.isEmail('test@gmail.com'));
-
-
-
-
-// console.log('utils.js is running');
-
-// console.log(square(4));
-// console.log(add(6,7));
-// console.log(subtract(123,23));
-
-
-// console.log(isAdult(16));
-// console.log(canDrink(35));
-// console.log(isSenior(63));
