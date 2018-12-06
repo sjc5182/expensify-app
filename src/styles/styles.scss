@@ -1,0 +1,9 @@
+// Scss use style tag to display in the DOM
+// Scss uses ; and {
+// Sass dont use ; and {
+// $brand-color: blue;
+// * {
+//     color: $brand-color;
+// }
+@import './base/settings';
+@import './base/base'; // acess to partial file, leave the _ and extention
