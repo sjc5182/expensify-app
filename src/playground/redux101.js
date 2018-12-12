@@ -1,11 +1,25 @@
 import { createStore } from 'redux';
 
-const store = createStore((state = { count: 0 }, action) => {
+const incrementCount = ({incrementBy = 1} = {}) => ({ // this is call action generator
+    type: 'INCREMENT',
+    incrementBy: incrementBy
+})
+
+const setCount = ({count = 1} = {}) => ({
+    type: 'SET',
+    count: count
+})
+
+const ResetCount = () => ({
+    type: 'RESET'
+})
+
+// reducer is pure function, which mean you dont use varibles that is not define in the function or aurgment. 
+const reducerCount = (state = { count: 0 }, action) => {
   switch (action.type) {
     case 'INCREMENT': 
-      const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1;
       return {
-        count: state.count + incrementBy
+        count: state.count + action.incrementBy
       }
     case 'DECREMENT':
       const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
@@ -23,30 +37,19 @@ const store = createStore((state = { count: 0 }, action) => {
     default: 
       return state;
   }  
-});
+}
+
+const store = createStore(reducerCount);
 
 const unsubscribe = store.subscribe(()=>{
   console.log(store.getState());
 })
 // Redux store allow us to send off object inside of method call
-store.dispatch(
-  {
-    type: 'INCREMENT',
-    incrementBy: 5
-  }
-)
+store.dispatch(incrementCount())
 
-store.dispatch(
-  {
-    type: 'INCREMENT'
-  }
-)
+store.dispatch(incrementCount({incrementBy: 5}))
 
-store.dispatch(
-  {
-    type: 'RESET'
-  }
-)
+store.dispatch(ResetCount())
 
 store.dispatch(
   {
@@ -61,9 +64,4 @@ store.dispatch(
   }
 )
 
-store.dispatch(
-  {
-    type: 'SET',
-    count: 101
-  }
-)
+store.dispatch(setCount({count: 101}))
