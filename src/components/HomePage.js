@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomePage = () =>(
   <div>
-    This is my porfolio home page
+    This is my Home page
   </div>
 )
 
