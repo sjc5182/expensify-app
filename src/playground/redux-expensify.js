@@ -20,6 +20,12 @@ const addExpense = (
   }
 });
 
+// Remove expense
+const removeExpense = ({ id } = {}) => ({
+  type: 'REMOVE_EXPENSE',
+  id
+})
+
 // Expenses Reducer
 
 const expensesReducerDefaultState = [];
@@ -27,9 +33,18 @@ const expensesReducerDefaultState = [];
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
     case 'ADD_EXPENSE':
-      return state.concat(action.expense)
-    default:
-      return state;
+      //return state.concat(action.expense)
+      // spread operator will do the job that concat do and better
+      return [
+        ...state,
+        action.expense
+      ];
+      case 'REMOVE_EXPENSE':
+        return state.filter(({ id })=>{
+          return id !== action.id;
+        })
+      default:
+        return state;
   }
 };
 
@@ -58,7 +73,11 @@ store.subscribe(() =>{
   console.log(store.getState())
 })
 
-store.dispatch(addExpense({ description: 'Rent', amount: 100 }))
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }))
+
+const expenseTwo = store.dispatch(addExpense({ description: 'meat', amount: 600 }))
+
+store.dispatch(removeExpense({ id: expenseOne.expense.id}))
 
 const demoState = {
   expenses: [{
@@ -75,3 +94,14 @@ const demoState = {
     endDate: 'undefined'
   }
 };
+
+const user = {
+  name: 'Jen',
+  age: 24
+};
+
+console.log({
+  ...user,
+  locaiton: 'pittsburgh',
+  age: 31
+});
