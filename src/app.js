@@ -15,10 +15,19 @@ const store = configureStore();
 store.dispatch(addExpense({description: 'gas bill'}));
 store.dispatch(addExpense({description: 'water bill'}));
 store.dispatch(setTextFilter('gas'));
-
+setTimeout(() =>{
+  store.dispatch(setTextFilter('water'));
+}, 3000)
 
 const state = store.getState();
 const visibleExpense = getVisibleExpenses(state.expenses, state.filters);
 console.log(visibleExpense);
 
-ReactDOM.render(AppRouter, document.getElementById('app'));
+const jsx = (
+  <Provider store = {store}>
+    <AppRouter />
+  </Provider>
+)
+
+
+ReactDOM.render(jsx, document.getElementById('app'));
