@@ -1,12 +1,17 @@
 // Export a stateless functional component
 // description, amount, createdAt
 import React from 'react';
+import { connect } from 'react-redux';
+import { removeExpense } from '../actions/expenses';
 
 
-const ExpensiveListItem = ({ description, amount, createAt }) => (
+const ExpensiveListItem = ({ dispatch, id, description, amount, createAt }) => (
   <div>
     <h3>{description}</h3>
     <p>{amount} - {createAt}</p>
+    <button onClick = {(e) => {
+      dispatch(removeExpense({ id }))
+    }}>Remove</button>
   </div>
   // <div>
   //   {props.expenses.map((expense) =>{
@@ -16,4 +21,4 @@ const ExpensiveListItem = ({ description, amount, createAt }) => (
 );
 
 
-export default ExpensiveListItem;
+export default connect()(ExpensiveListItem);
