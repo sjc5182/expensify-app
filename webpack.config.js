@@ -45,7 +45,7 @@ module.exports = (env) => {
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
-      historyApiFallback: true
+      historyApiFallback: true // this server up index.html in the public folder every time we got 404
     }
   };
 };
