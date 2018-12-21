@@ -7,3 +7,5 @@
 // }
 @import './base/settings';
 @import './base/base'; // acess to partial file, leave the _ and extention
+@import './components/header';
+@import './components/content-container';
